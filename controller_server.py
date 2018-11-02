@@ -16,16 +16,17 @@ sock.bind(server_address)
 # Listen for incoming connections
 sock.listen(1)
 
-while True:
+try:
+
     # Wait for a connection
     print('waiting for a connection')
     connection, client_address = sock.accept()
-    try:
+    while True:
         print('connection from', client_address)
 
         data = connection.recv(5)
         states = unzip_states(data)
         print('received {}'.format(states))
-    finally:
-        # Clean up the connection
-        connection.close()
+finally:
+    # Clean up the connection
+    connection.close()
